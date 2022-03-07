@@ -5,15 +5,12 @@ import {
   IonTitle, 
   IonToolbar 
 } from '@ionic/react';
+import MenuHeader from '../components/MenuHeader';
 
 const ProfilePage = () => {
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>Profile</IonTitle>
-        </IonToolbar>
-      </IonHeader>
+            <MenuHeader title="Profile" />
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>

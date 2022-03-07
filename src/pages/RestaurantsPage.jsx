@@ -4,17 +4,19 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  useIonAlert,
-  useIonViewWillEnter
+  useIonViewWillEnter,
+  IonButtons,
+  IonMenuButton
 } from '@ionic/react';
 import RestaurantList from '../components/RestaurantList';
 import { useState } from "react";
-import { getAuth } from "firebase/auth";
-
+// import { getAuth } from "firebase/auth";
+import MenuHeader from '../components/MenuHeader'
+  
 const RestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState([]);
 
-  const auth = getAuth();
+  // const auth = getAuth();
   // const user = auth.currentUser;
 
   async function getRestaurants() {
@@ -29,13 +31,10 @@ const RestaurantsPage = () => {
   });
 
   return (
+
     <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          
-          {/* <IonTitle>{user.email}</IonTitle> */}
-        </IonToolbar>
-      </IonHeader>
+      <MenuHeader title="Restaurants" />
+
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>

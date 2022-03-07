@@ -12,6 +12,7 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import MenuHeader from "../components/MenuHeader";
 
 export default function SignInPage() {
     const [mail, setMail] = useState("");
@@ -19,12 +20,6 @@ export default function SignInPage() {
 
     const history = useHistory();
     const auth = getAuth();
-
-    // auth().onAuthStateChanged(user => {
-    //     if(user) {
-    //       window.location = '/restaurants';
-    //     }
-    //   });
 
     function handleSubmit(event) {
         event.preventDefault();
@@ -41,6 +36,7 @@ export default function SignInPage() {
 
     return (
         <IonPage>
+        <MenuHeader />
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Sign In</IonTitle>
@@ -74,6 +70,11 @@ export default function SignInPage() {
                     <div className="ion-text-center">
                         <IonButton size="small" fill="clear" onClick={() => history.replace("/signup")}>
                             Sign Up
+                        </IonButton>
+                    </div>
+                    <div className="ion-text-center">
+                        <IonButton size="small" fill="clear" onClick={() => history.replace("/restaurants")}>
+                            Continue as guest
                         </IonButton>
                     </div>
                 </form>

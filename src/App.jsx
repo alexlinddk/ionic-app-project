@@ -1,21 +1,17 @@
 import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
-  IonIcon,
-  IonLabel,
   IonRouterOutlet,
-  IonTabBar,
-  IonTabButton,
-  IonTabs,
-  setupIonicReact
+  setupIonicReact,
+  IonSplitPane,
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { restaurant, person } from 'ionicons/icons';
 import ProfilePage from './pages/ProfilePage';
 import RestaurantsPage from './pages/RestaurantsPage';
 import RestaurantDetailView from './pages/RestaurantDetailView';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
+import Menu from './components/Menu';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -41,16 +37,16 @@ setupIonicReact();
 const App = () => (
   <IonApp>
     <IonReactRouter>
-      <IonTabs>
-
-        <IonRouterOutlet>
-          <Route exact path="/restaurants">
+      <IonSplitPane contentId="main">
+        <Menu />
+        <IonRouterOutlet id="main">
+          <Route path="/" exact={true}>
+            <Redirect to="/restaurants" />
+          </Route>
+          <Route path="/restaurants" exact={true}>
             <RestaurantsPage />
           </Route>
-          <Route exact path="/profile">
-            <ProfilePage />
-          </Route>
-          <Route path="/restaurants/:id">
+          <Route path="/restaurants/:id" exact={true}>
             <RestaurantDetailView />
           </Route>
           <Route exact path="/signin">
@@ -59,23 +55,11 @@ const App = () => (
           <Route exact path="/signup">
             <SignUpPage />
           </Route>
-          <Route exact path="/">
-            <Redirect to="/restaurants" />
+          <Route exact path="/profile">
+            <ProfilePage />
           </Route>
         </IonRouterOutlet>
-
-        <IonTabBar slot="bottom">
-          <IonTabButton tab="RestaurantsPage" href="/restaurants">
-            <IonIcon icon={restaurant}></IonIcon>
-            <IonLabel>Restaurants</IonLabel>
-          </IonTabButton>
-          <IonTabButton tab="ProfilePage" href="/profile">
-            <IonIcon icon={person}></IonIcon>
-            <IonLabel>Profile</IonLabel>
-          </IonTabButton>
-        </IonTabBar>
-
-      </IonTabs>
+      </IonSplitPane>
     </IonReactRouter>
   </IonApp>
 );
