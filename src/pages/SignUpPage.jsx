@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 
 export default function SignUpPage() {
     const [mail, setMail] = useState("");
@@ -26,10 +26,19 @@ export default function SignUpPage() {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-            })
-            .catch(error => {
-                console.log(error);
-            });
+                onAuthStateChanged(auth, (user) => {
+                    if (user) {
+                        // User is signed in, see docs for a list of available properties
+                        // https://firebase.google.com/docs/reference/js/firebase.User
+                        const uid = user.uid;
+                        history.push(`restaurants`);
+                        console.log('Logged in');
+                    } else {
+                        // User is signed out
+                        console.log('Logged out');
+                    }
+                });
+            }).catch(error => { console.log(error) })
     }
     return (
         <IonPage className="posts-page">

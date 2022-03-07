@@ -11,7 +11,7 @@ import {
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import MenuHeader from "../components/MenuHeader";
 
 export default function SignInPage() {
@@ -23,20 +23,27 @@ export default function SignInPage() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        signInWithEmailAndPassword(auth, mail, password)
-            .then(userCredential => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-            })
-            .catch(error => {
-                console.log(error);
+        signInWithEmailAndPassword(auth, mail, password).then(userCredential => {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    // User is signed in, see docs for a list of available properties
+                    // https://firebase.google.com/docs/reference/js/firebase.User
+                    const uid = user.uid;
+                    history.push(`restaurants`);
+                    console.log('Logged in');
+                } else {
+                    // User is signed out
+                    console.log('Logged out');
+                }
             });
+        }).catch(error => { console.log(error) })
     }
 
     return (
         <IonPage>
-        <MenuHeader />
             <IonHeader>
                 <IonToolbar>
                     <IonTitle>Sign In</IonTitle>

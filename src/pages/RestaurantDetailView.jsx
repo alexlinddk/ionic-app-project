@@ -1,4 +1,4 @@
-import { IonRouterLink, IonTitle, IonPage, IonImg, IonHeader, IonToolbar, IonContent, IonText } from "@ionic/react";
+import { IonRouterLink, IonTitle, IonPage, IonImg, IonHeader, IonToolbar, IonContent, IonText, IonButtons, IonMenuButton } from "@ionic/react";
 import { useState, useEffect, } from "react";
 import { useParams } from "react-router";
 
@@ -25,6 +25,9 @@ const RestaurantDetailView = () => {
         <IonPage>
             <IonHeader>
                 <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonMenuButton menu="start" />
+                    </IonButtons>
                     <IonTitle>{restaurant.name}</IonTitle>
                 </IonToolbar>
             </IonHeader>

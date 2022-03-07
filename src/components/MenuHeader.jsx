@@ -1,4 +1,4 @@
-import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle } from "@ionic/react";
+import { IonHeader, IonToolbar, IonButtons, IonMenuButton, IonTitle, IonAvatar, IonImg } from "@ionic/react";
 
 const MenuHeader = ({ title }) => {
     return (

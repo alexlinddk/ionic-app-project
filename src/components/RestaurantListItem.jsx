@@ -26,8 +26,6 @@ const RestaurantListItem = ({ restaurant }) => {
             </IonCardHeader>
             <IonCardContent>
                 <IonCardSubtitle><IonIcon icon={pin} />{restaurant.address}</IonCardSubtitle>
-                {/* <IonRouterLink href="#"><IonIcon icon={call} />{restaurant.phone}</IonRouterLink><br />
-                <IonRouterLink href="#"><IonIcon icon={at} />{restaurant.mail}</IonRouterLink> */}
             </IonCardContent>
         </IonCard>
     );
