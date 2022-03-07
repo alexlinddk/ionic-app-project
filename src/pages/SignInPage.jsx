@@ -16,8 +16,15 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 export default function SignInPage() {
     const [mail, setMail] = useState("");
     const [password, setPassword] = useState("");
+
     const history = useHistory();
     const auth = getAuth();
+
+    // auth().onAuthStateChanged(user => {
+    //     if(user) {
+    //       window.location = '/restaurants';
+    //     }
+    //   });
 
     function handleSubmit(event) {
         event.preventDefault();

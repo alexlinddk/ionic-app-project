@@ -15,7 +15,7 @@ const RestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState([]);
 
   const auth = getAuth();
-  const user = auth.currentUser;
+  // const user = auth.currentUser;
 
   async function getRestaurants() {
     const response = await fetch("https://restaurants-app-2402e-default-rtdb.firebaseio.com/restaurants.json");
@@ -33,7 +33,7 @@ const RestaurantsPage = () => {
       <IonHeader>
         <IonToolbar>
           
-          <IonTitle>{user.email}</IonTitle>
+          {/* <IonTitle>{user.email}</IonTitle> */}
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
