@@ -1,17 +1,12 @@
 import {
   IonAvatar,
   IonContent,
-  IonHeader,
   IonPage,
-  IonTitle,
-  IonToolbar,
   IonImg,
   IonCard,
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
-  IonCardSubtitle,
-  IonButtons,
   IonButton
 } from '@ionic/react';
 import MenuHeader from '../components/MenuHeader';

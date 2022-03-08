@@ -10,7 +10,7 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantOutline, restaurantSharp, personOutline, personSharp, logOutOutline, logOutSharp, refresh } from 'ionicons/icons';
+import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantOutline, restaurantSharp, personOutline, personSharp } from 'ionicons/icons';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const loggedIn = [

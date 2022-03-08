@@ -12,7 +12,6 @@ import {
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
-import MenuHeader from "../components/MenuHeader";
 
 export default function SignInPage() {
     const [mail, setMail] = useState("");
