@@ -10,15 +10,24 @@ import {
   IonCardHeader,
   IonCardContent,
   IonCardTitle,
-  IonCardSubtitle
+  IonCardSubtitle,
+  IonButtons,
+  IonButton
 } from '@ionic/react';
 import MenuHeader from '../components/MenuHeader';
 import { getAuth } from "firebase/auth";
+import { useHistory } from "react-router-dom";
 
 const ProfilePage = () => {
 
   const auth = getAuth();
   const user = auth.currentUser;
+  const history = useHistory();
+
+  function handleSignOut() {
+    auth.signOut();
+    history.replace('/restaurants')
+  }
 
   return (
     <IonPage>
@@ -32,6 +41,7 @@ const ProfilePage = () => {
           </IonCardHeader>
           <IonCardContent>
             <IonCardTitle>{user ? user.email : 'Your name'}</IonCardTitle>
+              <IonButton onClick={handleSignOut} expand="block">Sign out</IonButton>
           </IonCardContent>
         </IonCard>
       </IonContent>

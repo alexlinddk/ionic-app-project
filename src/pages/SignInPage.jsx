@@ -31,8 +31,8 @@ export default function SignInPage() {
                 if (user) {
                     // User is signed in, see docs for a list of available properties
                     // https://firebase.google.com/docs/reference/js/firebase.User
-                    const uid = user.uid;
-                    history.push(`restaurants`);
+                    // const uid = user.uid;
+                    history.replace(`restaurants`);
                     console.log('Logged in');
                 } else {
                     // User is signed out

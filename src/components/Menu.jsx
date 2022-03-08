@@ -10,8 +10,8 @@ import {
 } from '@ionic/react';
 
 import { useLocation } from 'react-router-dom';
-import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantOutline, restaurantSharp, personOutline, personSharp, logOutOutline, logOutSharp, warningOutline, warningSharp } from 'ionicons/icons';
-import { getAuth } from "firebase/auth";
+import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantOutline, restaurantSharp, personOutline, personSharp, logOutOutline, logOutSharp, refresh } from 'ionicons/icons';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 const loggedIn = [
     {
@@ -26,12 +26,6 @@ const loggedIn = [
         iosIcon: personOutline,
         mdIcon: personSharp
     },
-    {
-        title: 'Sign out',
-        url: '/signin',
-        iosIcon: logOutOutline,
-        mdIcon: logOutSharp
-    }
 ];
 
 const loggedOut = [
@@ -60,6 +54,22 @@ const Menu = () => {
     const auth = getAuth();
     const user = auth.currentUser;
 
+    const handleLogout = () => {
+
+        auth.signOut();
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, see docs for a list of available properties
+                // https://firebase.google.com/docs/reference/js/firebase.User
+                // const uid = user.uid;
+                console.log('Logged in');
+            } else {
+                // User is signed out
+                console.log('Logged out');
+            }
+        });
+    }
+
     return (
         <IonMenu contentId="main" type="overlay">
             <IonContent>
@@ -69,7 +79,7 @@ const Menu = () => {
                         !user ?
                             loggedOut.map((page, index) => {
                                 return (
-                                    <IonMenuToggle key={index} autoHide={false} onClick={() => { page.title == 'Sign out' && auth.signOut() }}>
+                                    <IonMenuToggle key={index} autoHide={false}>
                                         <IonItem className={location.pathname === page.url ? 'selected' : ''} routerLink={page.url} routerDirection="none" lines="none" detail={false}>
                                             <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} />
                                             <IonLabel>{page.title}</IonLabel>
@@ -79,7 +89,7 @@ const Menu = () => {
                             }) :
                             loggedIn.map((page, index) => {
                                 return (
-                                    <IonMenuToggle key={index} autoHide={false} onClick={() => { page.title == 'Sign out' && auth.signOut() }}>
+                                    <IonMenuToggle key={index} autoHide={false} onClick={() => { page.title === 'Sign out' && handleLogout() }}>
                                         <IonItem className={location.pathname === page.url ? 'selected' : ''} routerLink={page.url} routerDirection="none" lines="none" detail={false}>
                                             <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} />
                                             <IonLabel>{page.title}</IonLabel>
