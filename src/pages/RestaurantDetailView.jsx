@@ -42,24 +42,7 @@ const RestaurantDetailView = () => {
         speed: 400,
         autoplay: true
     };
-
-    // const menuItems = [
-    //     {
-
-    //         name: 'Burger',
-    //         description: 'A delicious burger',
-    //         price: 69.95
-    //     },
-    //     {
-    //         name: 'Sandwich',
-    //         description: 'A delicious burger',
-    //         price: 59.95
-    //     }, {
-    //         name: 'Burger',
-    //         description: 'A delicious burger',
-    //         price: 79.95
-    //     },
-    // ]
+    
     console.log(restaurant);
     return (
         <IonPage>
