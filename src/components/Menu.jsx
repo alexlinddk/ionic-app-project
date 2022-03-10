@@ -12,6 +12,7 @@ import {
 import { useLocation } from 'react-router-dom';
 import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantOutline, restaurantSharp, personOutline, personSharp } from 'ionicons/icons';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { useState } from 'react';
 
 const loggedIn = [
     {
@@ -50,25 +51,22 @@ const loggedOut = [
 ];
 
 const Menu = () => {
-    const location = useLocation();
+    const [user, setUser] = useState({});
     const auth = getAuth();
-    const user = auth.currentUser;
+    const location = useLocation();
 
-    const handleLogout = () => {
-
-        auth.signOut();
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                // User is signed in, see docs for a list of available properties
-                // https://firebase.google.com/docs/reference/js/firebase.User
-                // const uid = user.uid;
-                console.log('Logged in');
-            } else {
-                // User is signed out
-                console.log('Logged out');
-            }
-        });
-    }
+    onAuthStateChanged(auth, (user) => {
+        setUser(user);
+        if (user) {
+          // User is signed in, see docs for a list of available properties
+          // https://firebase.google.com/docs/reference/js/firebase.User
+          // const uid = user.uid;
+          console.log('Logged in');
+        } else {
+          // User is signed out
+          console.log('Logged out');
+        }
+    })
 
     return (
         <IonMenu contentId="main" type="overlay">
@@ -89,7 +87,7 @@ const Menu = () => {
                             }) :
                             loggedIn.map((page, index) => {
                                 return (
-                                    <IonMenuToggle key={index} autoHide={false} onClick={() => { page.title === 'Sign out' && handleLogout() }}>
+                                    <IonMenuToggle key={index} autoHide={false}>
                                         <IonItem className={location.pathname === page.url ? 'selected' : ''} routerLink={page.url} routerDirection="none" lines="none" detail={false}>
                                             <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} />
                                             <IonLabel>{page.title}</IonLabel>
