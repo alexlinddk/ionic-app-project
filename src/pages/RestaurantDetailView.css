@@ -1,0 +1,16 @@
+.menuTitle{
+    padding-inline: 0;
+}
+
+.menuTitle p{ 
+    font-size: 18px;    
+}
+
+/* p styling */
+.sc-ion-label-md-s p {
+    font-size: 18px;
+}
+
+.button-solid{
+    --background: #d65a01;
+}

@@ -94,28 +94,28 @@ const RestaurantDetailView = () => {
                     </IonItem>
                     <IonItem>
                         <IonIcon slot="start" icon={pin} />
-                        <IonLabel>{restaurant.address}</IonLabel>
+                        <IonLabel><p>{restaurant.address}</p></IonLabel>
                     </IonItem>
                     <IonItem>
                         <IonIcon slot="start" icon={call} />
                         <IonLabel>
-                            <IonRouterLink>{restaurant.phone}</IonRouterLink>
+                            <IonRouterLink><p>{restaurant.phone}</p></IonRouterLink>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
                         <IonIcon slot="start" icon={mail} />
                         <IonLabel>
-                            <IonRouterLink>{restaurant.mail}</IonRouterLink>
+                            <IonRouterLink><p>{restaurant.mail}</p></IonRouterLink>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
                         <IonIcon slot="start" icon={time} />
-                        <IonLabel>Onsdag – lørdag: 17.00 – 22.00</IonLabel>
+                        <IonLabel><p>Onsdag – lørdag: 17.00 – 22.00</p></IonLabel>
                     </IonItem>
                     <IonRouterLink href="https://restaurantseafood.dk/menu/">
                         <IonItem>
                             <IonIcon slot="start" icon={book} />
-                            <IonTitle>Go to menu</IonTitle>
+                            <IonTitle className="menuTitle"><p>Go to menu</p></IonTitle>
                             <IonIcon slot="end" icon={openOutline} />
                         </IonItem>
                     </IonRouterLink>
