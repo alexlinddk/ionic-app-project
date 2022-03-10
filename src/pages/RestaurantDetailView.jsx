@@ -42,7 +42,7 @@ const RestaurantDetailView = () => {
         speed: 400,
         autoplay: true
     };
-    
+
     console.log(restaurant);
     return (
         <IonPage>
