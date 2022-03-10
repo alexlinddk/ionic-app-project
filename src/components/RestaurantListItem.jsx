@@ -10,6 +10,7 @@ import {
 } from "@ionic/react";
 import { at, pin, call } from "ionicons/icons"
 import { useHistory } from "react-router-dom";
+import './RestaurantListItem.css';
 
 const RestaurantListItem = ({ restaurant }) => {
     const history = useHistory();
@@ -22,10 +23,10 @@ const RestaurantListItem = ({ restaurant }) => {
         <IonCard class="ion-margin">
             <IonCardHeader onClick={goToRestaurantDetailView}>
                 <IonImg src={restaurant.images[0]} />
-                <IonCardTitle>{restaurant.name}</IonCardTitle>
+                <IonCardTitle><p>{restaurant.name}</p></IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
-                <IonCardSubtitle><IonIcon icon={pin} />{restaurant.address}</IonCardSubtitle>
+                <IonCardSubtitle><p><IonIcon icon={pin} />{restaurant.address}</p></IonCardSubtitle>
             </IonCardContent>
         </IonCard>
     );

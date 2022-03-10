@@ -19,6 +19,7 @@ import {
 import { pin, call, mail, time, book, openOutline } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
 import { useParams } from "react-router";
+import './RestaurantDetailView.css';
 
 const RestaurantDetailView = () => {
     const [restaurant, setRestaurant] = useState({});

@@ -13,7 +13,8 @@ import {
 import RestaurantList from '../components/RestaurantList';
 import { useState } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import MenuHeader from '../components/MenuHeader'
+import MenuHeader from '../components/MenuHeader';
+import './RestaurantsPage.css';
 
 const RestaurantsPage = () => {
   const [restaurants, setRestaurants] = useState([]);
