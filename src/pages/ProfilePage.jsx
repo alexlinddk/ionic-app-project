@@ -22,9 +22,9 @@ const ProfilePage = () => {
   function handleSignOut() {
     auth.signOut();
     history.replace('/restaurants')
-    window.opener.location.reload(true);
-    document.getElementsByTagName('Menu').reload();
   }
+
+  
 
   return (
     <IonPage>
