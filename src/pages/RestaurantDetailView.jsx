@@ -15,7 +15,6 @@ import {
     IonButton,
     IonSlides,
     IonSlide,
-    IonText
 } from "@ionic/react";
 import { pin, call, mail, time, book, openOutline } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
