@@ -21,7 +21,7 @@ const RestaurantListItem = ({ restaurant }) => {
     return (
         <IonCard class="ion-margin">
             <IonCardHeader onClick={goToRestaurantDetailView}>
-                <IonImg src={restaurant.image} />
+                <IonImg src={restaurant.images[0]} />
                 <IonCardTitle>{restaurant.name}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
