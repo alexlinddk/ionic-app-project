@@ -16,7 +16,7 @@ import {
     IonSlides,
     IonSlide,
 } from "@ionic/react";
-import { pin, call, mail, time, book, openOutline } from 'ionicons/icons';
+import { pin, call, mail, time, book, openOutline, create } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
 import { useParams } from "react-router";
 
@@ -103,6 +103,12 @@ const RestaurantDetailView = () => {
                             <IonIcon slot="start" icon={book} />
                             <IonTitle>Go to menu</IonTitle>
                             <IonIcon slot="end" icon={openOutline} />
+                        </IonItem>
+                    </IonRouterLink>
+                    <IonRouterLink>
+                        <IonItem>
+                            <IonIcon slot="start" icon={create} />
+                            <IonTitle>Write review</IonTitle>
                         </IonItem>
                     </IonRouterLink>
                 </IonList>
