@@ -14,46 +14,46 @@ import { personAddOutline, personAddSharp, logInOutline, logInSharp, restaurantO
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { useState } from 'react';
 
-const loggedIn = [
-    {
-        title: 'Restaurants',
-        url: '/restaurants',
-        iosIcon: restaurantOutline,
-        mdIcon: restaurantSharp
-    },
-    {
-        title: 'Profile',
-        url: '/profile',
-        iosIcon: personOutline,
-        mdIcon: personSharp
-    },
-];
-
-const loggedOut = [
-    {
-        title: 'Restaurants',
-        url: '/restaurants',
-        iosIcon: restaurantOutline,
-        mdIcon: restaurantSharp
-    },
-    {
-        title: 'Sign in',
-        url: '/signin',
-        iosIcon: logInOutline,
-        mdIcon: logInSharp
-    },
-    {
-        title: 'Sign Up',
-        url: '/signup',
-        iosIcon: personAddOutline,
-        mdIcon: personAddSharp
-    }
-];
-
 const Menu = () => {
     const [user, setUser] = useState({});
     const auth = getAuth();
     const location = useLocation();
+
+    const loggedIn = [
+        {
+            title: 'Restaurants',
+            url: '/restaurants',
+            iosIcon: restaurantOutline,
+            mdIcon: restaurantSharp
+        },
+        {
+            title: 'Profile',
+            url: '/profile',
+            iosIcon: personOutline,
+            mdIcon: personSharp
+        },
+    ];
+    
+    const loggedOut = [
+        {
+            title: 'Restaurants',
+            url: '/restaurants',
+            iosIcon: restaurantOutline,
+            mdIcon: restaurantSharp
+        },
+        {
+            title: 'Sign in',
+            url: '/signin',
+            iosIcon: logInOutline,
+            mdIcon: logInSharp
+        },
+        {
+            title: 'Sign Up',
+            url: '/signup',
+            iosIcon: personAddOutline,
+            mdIcon: personAddSharp
+        }
+    ];
 
     onAuthStateChanged(auth, (user) => {
         setUser(user);

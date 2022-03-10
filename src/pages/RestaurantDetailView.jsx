@@ -14,7 +14,8 @@ import {
     IonIcon,
     IonButton,
     IonSlides,
-    IonSlide
+    IonSlide,
+    IonText
 } from "@ionic/react";
 import { pin, call, mail, time, book, openOutline } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
@@ -55,8 +56,7 @@ const RestaurantDetailView = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {
-                    restaurant.images &&
+                {restaurant.images &&
                     <IonSlides pager={true} options={slideOpts}>
                         {restaurant.images.map(imageUrl => {
                             return (
@@ -65,12 +65,10 @@ const RestaurantDetailView = () => {
                                 </IonSlide>
                             );
                         })}
-                    </IonSlides>
-                }
-
+                    </IonSlides>}
                 <IonList>
                     <IonItem>
-                        <IonRouterLink style={{ margin: '0 auto' }} href="https://www.bord-booking.dk/online_booking.php?restaurantId=70530">
+                        <IonRouterLink style={{ margin: '0 auto' }} href={restaurant.bookUrl}>
                             <IonButton>Book Table</IonButton>
                         </IonRouterLink>
                     </IonItem>
@@ -92,16 +90,22 @@ const RestaurantDetailView = () => {
                     </IonItem>
                     <IonItem>
                         <IonIcon slot="start" icon={time} />
-                        <IonLabel>Onsdag – lørdag: 17.00 – 22.00</IonLabel>
+                        <IonLabel>
+                            <IonList>
+                                {restaurant.openingHours &&
+                                    restaurant.openingHours.map(item => {
+                                        return <IonItem key={item.id}>{item}<br /></IonItem>
+                                    })}
+                            </IonList>
+                        </IonLabel>
                     </IonItem>
-                    <IonRouterLink href="https://restaurantseafood.dk/menu/">
+                    <IonRouterLink href={restaurant.menuUrl}>
                         <IonItem>
                             <IonIcon slot="start" icon={book} />
                             <IonTitle>Go to menu</IonTitle>
                             <IonIcon slot="end" icon={openOutline} />
                         </IonItem>
                     </IonRouterLink>
-                    {/* <MenuList menuItems={menuItems} /> */}
                 </IonList>
             </IonContent>
         </IonPage>

@@ -8,7 +8,7 @@ import {
     IonImg,
     IonRouterLink
 } from "@ionic/react";
-import { at, pin, call } from "ionicons/icons"
+import { pin } from "ionicons/icons"
 import { useHistory } from "react-router-dom";
 
 const RestaurantListItem = ({ restaurant }) => {
