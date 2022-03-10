@@ -6,7 +6,6 @@ import {
     IonHeader,
     IonToolbar,
     IonContent,
-    IonText,
     IonButtons,
     IonMenuButton,
     IonLabel,
@@ -20,7 +19,6 @@ import {
 import { pin, call, mail, time, book, openOutline } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
 import { useParams } from "react-router";
-import MenuList from "../components/MenuList"
 
 const RestaurantDetailView = () => {
     const [restaurant, setRestaurant] = useState({});
@@ -29,10 +27,8 @@ const RestaurantDetailView = () => {
     const restaurantId = params.id;
 
     async function loadData() {
-        console.log(restaurantId);
         //fetch restaurant data by restaurantId prop
         const res = await fetch(`https://restaurants-app-2402e-default-rtdb.firebaseio.com/restaurants/${restaurantId}.json`);
-        console.log(res);
         const restaurantData = await res.json();
         setRestaurant(restaurantData);
     }
@@ -41,10 +37,11 @@ const RestaurantDetailView = () => {
         loadData();
     }, []);
 
-    // const slideOpts = {
-    //     initialSlide: 1,
-    //     speed: 400
-    //   };
+    const slideOpts = {
+        initialSlide: 1,
+        speed: 400,
+        autoplay: true
+    };
 
     // const menuItems = [
     //     {
@@ -63,7 +60,7 @@ const RestaurantDetailView = () => {
     //         price: 79.95
     //     },
     // ]
-
+    console.log(restaurant);
     return (
         <IonPage>
             <IonHeader>
@@ -75,14 +72,19 @@ const RestaurantDetailView = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {/* <IonSlides pager={true} options={slideOpts}>
-                    {restaurant.images.map(imageUrl => {
-                        <IonSlide>
-                            <IonImg src={restaurant.images[0]} />
-                        </IonSlide>
-                    })}
-                </IonSlides> */}
-                <IonImg src={restaurant.images[0]} />
+                {
+                    restaurant.images &&
+                    <IonSlides pager={true} options={slideOpts}>
+                        {restaurant.images.map(imageUrl => {
+                            return (
+                                <IonSlide>
+                                    <IonImg key={imageUrl.id} src={imageUrl} />
+                                </IonSlide>
+                            );
+                        })}
+                    </IonSlides>
+                }
+
                 <IonList>
                     <IonItem>
                         <IonRouterLink style={{ margin: '0 auto' }} href="https://www.bord-booking.dk/online_booking.php?restaurantId=70530">
