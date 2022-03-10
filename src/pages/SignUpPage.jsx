@@ -26,6 +26,7 @@ export default function SignUpPage() {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
+                
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         // User is signed in, see docs for a list of available properties
