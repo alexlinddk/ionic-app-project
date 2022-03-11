@@ -15,14 +15,16 @@ import {
     IonButton,
     IonSlides,
     IonSlide,
+    IonText
 } from "@ionic/react";
-import { pin, call, mail, time, book, openOutline, create } from 'ionicons/icons';
+import { pin, call, mail, time, book, arrowForward, create } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 
 const RestaurantDetailView = () => {
     const [restaurant, setRestaurant] = useState({});
 
+    const history = useHistory(); 
     const params = useParams();
     const restaurantId = params.id;
 
@@ -38,7 +40,11 @@ const RestaurantDetailView = () => {
     }, []);
 
     const slideOpts = {
-        autoplay: true
+        autoplay: true,
+    };
+
+    const goToReviews = () => {
+        history.replace(`restaurants/reviews/${restaurant.uid - 1}`);
     };
 
     console.log(restaurant);
@@ -58,7 +64,7 @@ const RestaurantDetailView = () => {
                         {restaurant.images.map(imageUrl => {
                             return (
                                 <IonSlide>
-                                    <IonImg key={imageUrl.id} src={imageUrl} />
+                                    <IonImg key={imageUrl.id} src={imageUrl} style={{"max-height": "250px"}} />
                                 </IonSlide>
                             );
                         })}
@@ -86,27 +92,26 @@ const RestaurantDetailView = () => {
                         </IonLabel>
                     </IonItem>
                     <IonItem>
-                        <IonIcon slot="start" icon={time} />
+                        <IonIcon  slot="start" icon={time} />
                         <IonLabel>
-                            <IonList>
                                 {restaurant.openingHours &&
                                     restaurant.openingHours.map(item => {
-                                        return <IonItem key={item.id}>{item}<br /></IonItem>
+                                        return (<IonText key={item.id} style={{"line-height": "30px"}}>{item}<br /></IonText>)
                                     })}
-                            </IonList>
                         </IonLabel>
                     </IonItem>
                     <IonRouterLink href={restaurant.menuUrl}>
                         <IonItem>
                             <IonIcon slot="start" icon={book} />
-                            <IonTitle>Go to menu</IonTitle>
-                            <IonIcon slot="end" icon={openOutline} />
+                            <IonTitle>Menu</IonTitle>
+                            <IonIcon slot="end" icon={arrowForward} />
                         </IonItem>
                     </IonRouterLink>
-                    <IonRouterLink>
+                    <IonRouterLink onClick={goToReviews}>
                         <IonItem>
                             <IonIcon slot="start" icon={create} />
-                            <IonTitle>Write review</IonTitle>
+                            <IonTitle>Reviews</IonTitle>
+                            <IonIcon slot="end" icon={arrowForward} />
                         </IonItem>
                     </IonRouterLink>
                 </IonList>

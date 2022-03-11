@@ -15,13 +15,13 @@ const RestaurantListItem = ({ restaurant }) => {
     const history = useHistory();
 
     function goToRestaurantDetailView() {
-        history.push(`restaurants/${restaurant.uid - 1}`);
+        history.replace(`restaurants/${restaurant.uid - 1}`);
     }
 
     return (
         <IonCard class="ion-margin" style={{"border-radius": "7px"}}>
             <IonCardHeader onClick={goToRestaurantDetailView}>
-                <IonImg src={restaurant.images[0]} style={{"border-radius": "7px", "overflow": "hidden", "max-height": "200px"}} />
+                <IonImg src={restaurant.images[0]} style={{"border-radius": "7px", "overflow": "hidden", "maxHeight": "200px"}} />
                 <IonCardTitle style={{"margin-top": "20px"}}e>{restaurant.name}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>

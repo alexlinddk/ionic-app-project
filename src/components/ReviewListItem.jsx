@@ -1,4 +1,5 @@
-import { IonAvatar, IonCard } from "@ionic/react";
+import { IonAvatar, IonCard, IonCol, IonImg, IonRow, IonText } from "@ionic/react";
+
 
 const ReviewListitem = ({ user, review }) => {
     return (
