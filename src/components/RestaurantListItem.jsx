@@ -19,10 +19,10 @@ const RestaurantListItem = ({ restaurant }) => {
     }
 
     return (
-        <IonCard class="ion-margin">
+        <IonCard class="ion-margin" style={{"border-radius": "7px"}}>
             <IonCardHeader onClick={goToRestaurantDetailView}>
-                <IonImg src={restaurant.images[0]} />
-                <IonCardTitle>{restaurant.name}</IonCardTitle>
+                <IonImg src={restaurant.images[0]} style={{"border-radius": "7px", "overflow": "hidden", "max-height": "200px"}} />
+                <IonCardTitle style={{"margin-top": "20px"}}e>{restaurant.name}</IonCardTitle>
             </IonCardHeader>
             <IonCardContent>
                 <IonCardSubtitle><IonIcon icon={pin} />{restaurant.address}</IonCardSubtitle>

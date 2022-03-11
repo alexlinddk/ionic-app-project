@@ -38,8 +38,6 @@ const RestaurantDetailView = () => {
     }, []);
 
     const slideOpts = {
-        initialSlide: 1,
-        speed: 400,
         autoplay: true
     };
 
@@ -66,11 +64,11 @@ const RestaurantDetailView = () => {
                         })}
                     </IonSlides>}
                 <IonList>
-                    <IonItem>
-                        <IonRouterLink style={{ margin: '0 auto' }} href={restaurant.bookUrl}>
-                            <IonButton>Book Table</IonButton>
+                    <IonButton style={{ margin: '20px auto' }}>
+                        <IonRouterLink href={restaurant.bookUrl} style={{ color: "white" }}>
+                            Book Table
                         </IonRouterLink>
-                    </IonItem>
+                    </IonButton>
                     <IonItem>
                         <IonIcon slot="start" icon={pin} />
                         <IonLabel>{restaurant.address}</IonLabel>
