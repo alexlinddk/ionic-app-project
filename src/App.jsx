@@ -12,7 +12,8 @@ import RestaurantDetailView from './pages/RestaurantDetailView';
 import SignInPage from './pages/SignInPage';
 import SignUpPage from './pages/SignUpPage';
 import Menu from './components/Menu';
-import RestaurantReviewPage from './pages/RestaurantReviewsPage'
+import RestaurantReviewsPage from './pages/RestaurantReviewsPage'
+import UserReviewsPage from './pages/UserReviewsPage';
 import { app } from './firebaseConfig'
 
 /* Core CSS required for Ionic components to work properly */
@@ -52,7 +53,10 @@ const App = () => (
             <RestaurantDetailView />
           </Route>
           <Route path="/restaurants/reviews/:id" exact={true}>
-            <RestaurantReviewPage />
+            <RestaurantReviewsPage />
+          </Route>
+          <Route path="/profile/reviews/:id" exact={true}>
+            <UserReviewsPage />
           </Route>
           <Route exact path="/signin">
             <SignInPage />

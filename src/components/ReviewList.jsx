@@ -1,7 +1,7 @@
 import { IonList } from "@ionic/react";
 import ReviewListitem from "./ReviewListItem";
 
-const ReviewList = (reviews) => {
+const ReviewList = ({reviews}) => {
     return (
         <IonList>
             {reviews.map(review => {

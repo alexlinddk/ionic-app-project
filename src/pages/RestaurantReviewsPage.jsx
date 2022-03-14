@@ -14,7 +14,7 @@ const RestaurantReviewsPage = () => {
         const response = await fetch("https://restaurants-app-2402e-default-rtdb.firebaseio.com/reviews.json");
         const data = await response.json();
         const reviewsArray = Object.keys(data).map(key => ({ id: key, ...data[key] }));
-        const restaurantReviews = reviewsArray.filter(review => review.restaurant.id == restaurant.id);
+        const restaurantReviews = reviewsArray.filter(review => review.restaurant.id === restaurant.id);
         console.log(restaurantReviews);
         setReviews(restaurantReviews);
     }
@@ -32,7 +32,10 @@ const RestaurantReviewsPage = () => {
         getRestaurant();
     });
     return (
-        <ReviewList reviews={reviews} />
+        <>
+                    {/* <h1>YO</h1> */}
+                    <ReviewList reviews={reviews} />
+        </>
     );
 }
 

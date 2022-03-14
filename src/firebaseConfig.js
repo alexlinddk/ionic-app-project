@@ -1,6 +1,8 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { getDatabase, ref } from "firebase/database";
+import { getStorage } from "firebase/storage";
+import { initializeAuth, indexedDBLocalPersistence } from "firebase/auth";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -20,3 +22,22 @@ const app = initializeApp(firebaseConfig);
 // Get a reference to the database service
 const database = getDatabase(app);
 
+export const auth = initializeAuth(app, {
+  persistence: indexedDBLocalPersistence
+});
+
+// Reference to reviews in Realtime DB
+export const reviewsRef = ref(database, "reviews");
+// Reference to users in Realtime DB
+export const usersRef = ref(database, "users");
+// Get reference to specific review using post id
+export function getPostRef(reviewId) {
+    return ref(database, "reviews/" + reviewId);
+}
+// Get reference to specific user using user id
+export function getUserRef(userId) {
+    return ref(database, "users/" + userId);
+}
+
+// Reference to the storage service
+export const storage = getStorage(app);
