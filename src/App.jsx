@@ -53,7 +53,7 @@ const App = () => (
           <Route path="/restaurants/:id" exact={true}>
             <RestaurantDetailView />
           </Route>
-          <Route path="/restaurants/:id/reviews" exact={true}>
+          <Route path="/restaurants/reviews/:id" exact={true}>
             <RestaurantReviewsPage />
           </Route>
           <Route path="/profile/reviews" exact={true}>

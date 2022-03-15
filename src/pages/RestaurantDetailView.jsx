@@ -47,7 +47,7 @@ const RestaurantDetailView = () => {
     };
 
     const goToReviews = () => {
-        history.push(`/restaurants/${restaurantId}/reviews`);
+        history.push(`/restaurants/reviews/${restaurantId}`);
     };
 
     const bookTable = () => {
