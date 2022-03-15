@@ -31,12 +31,23 @@ const RestaurantReviewsPage = () => {
         getReviews();
         getRestaurant();
     });
-    return (
-        <>
-                    { reviews.map(restaurant =><h1>{restaurantId}</h1>)}
-                    <ReviewList reviews={reviews} />
-        </>
-    );
+    
+    
+return (
+<>
+            { reviews.map(restaurant =><h1>{restaurantId}</h1>)}
+            <ReviewList reviews={reviews} />
+</>
+);
 }
+
+// function RestaurantReviews() {
+    
+//     return (
+//         { reviews.map(restaurant =><h1>{restaurantId}</h1>)}
+//                     <ReviewList reviews={reviews} />
+//     )
+// }
+
 
 export default RestaurantReviewsPage;
