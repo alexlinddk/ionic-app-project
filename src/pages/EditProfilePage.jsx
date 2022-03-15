@@ -25,9 +25,10 @@ import {
 } from "@ionic/react";
 import MenuHeader from "../components/MenuHeader";
 import { getAuth } from "firebase/auth";
-import { usersRef } from "../firebaseConfig";
-import { push, ref } from "firebase/database";
-import { getDownloadURL } from "firebase/storage";
+import { storage, usersRef } from "../firebaseConfig";
+import { push, ref, set } from "firebase/database";
+import { getDownloadURL, uploadString } from "firebase/storage";
+import { useHistory } from "react-router";
 
 
 
@@ -43,6 +44,7 @@ const EditProfilePage = () => {
 
     const auth = getAuth();
     const user = auth.currentUser;
+    const history = useHistory();
 
     useEffect(() => {
         if (user) {
@@ -149,7 +151,7 @@ const EditProfilePage = () => {
                                 {image && <IonImg className="ion-padding" src={image} onClick={takePicture} />}
 
                                 <div className="ion-padding">
-                                    {image && title && body ? (
+                                    {image && name && email && password ? (
                                         <IonButton expand="block">Save</IonButton>
                                     ) : (
                                         <IonButton type="submit" expand="block" disabled>
