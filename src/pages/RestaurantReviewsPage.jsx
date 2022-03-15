@@ -33,7 +33,7 @@ const RestaurantReviewsPage = () => {
     });
     return (
         <>
-                    {/* <h1>YO</h1> */}
+                    { reviews.map(restaurant =><h1>{restaurantId}</h1>)}
                     <ReviewList reviews={reviews} />
         </>
     );
