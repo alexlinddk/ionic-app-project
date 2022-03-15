@@ -4,7 +4,9 @@ import { Toast } from "@capacitor/toast";
 import { camera } from "ionicons/icons";
 import {
     IonAvatar,
+    IonBackButton,
     IonButton,
+    IonButtons,
     IonCard,
     IonCardContent,
     IonCardHeader,
@@ -21,6 +23,8 @@ import {
     IonPage,
     IonRow,
     IonTextarea,
+    IonTitle,
+    IonToolbar,
     useIonLoading
 } from "@ionic/react";
 import MenuHeader from "../components/MenuHeader";
@@ -29,8 +33,6 @@ import { storage, usersRef } from "../firebaseConfig";
 import { push, ref, set } from "firebase/database";
 import { getDownloadURL, uploadString } from "firebase/storage";
 import { useHistory } from "react-router";
-
-
 
 const EditProfilePage = () => {
     const [name, setName] = useState("");
@@ -104,7 +106,12 @@ const EditProfilePage = () => {
 
     return (
         <IonPage>
-            <MenuHeader title="Profile" />
+            <IonToolbar>
+                <IonButtons slot="start">
+                    <IonBackButton text="Back" defaultHref="/profile"></IonBackButton>
+                </IonButtons>
+                <IonTitle>Edit profile</IonTitle>
+            </IonToolbar>
             <IonContent fullscreen style={{ display: 'flex' }}>
                 <IonCard>
                     <IonCardHeader className='profile-style' style={{ padding: "50px 0px 15px 0px" }}>
@@ -126,7 +133,7 @@ const EditProfilePage = () => {
                                 </IonItem>
                                 <IonItem>
                                     <IonLabel position="stacked">Email</IonLabel>
-                                    <IonTextarea
+                                    <IonInput
                                         value={email}
                                         placeholder="Change your email"
                                         onIonChange={e => setEmail(e.target.value)}
@@ -135,7 +142,8 @@ const EditProfilePage = () => {
                                 </IonItem>
                                 <IonItem>
                                     <IonLabel position="stacked">Password</IonLabel>
-                                    <IonTextarea
+                                    <IonInput
+                                        type="password"
                                         value={password}
                                         placeholder="Change your password"
                                         onIonChange={e => setPassword(e.target.value)}

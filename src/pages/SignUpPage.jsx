@@ -7,7 +7,9 @@ import {
     IonItem,
     IonLabel,
     IonInput,
-    IonButton
+    IonButton,
+    IonButtons,
+    IonBackButton
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -26,7 +28,7 @@ export default function SignUpPage() {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-                
+
                 onAuthStateChanged(auth, (user) => {
                     if (user) {
                         // User is signed in, see docs for a list of available properties
@@ -45,6 +47,9 @@ export default function SignUpPage() {
         <IonPage className="posts-page">
             <IonHeader>
                 <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonBackButton text="Back" defaultHref="/restaurants"></IonBackButton>
+                    </IonButtons>
                     <IonTitle>Sign Up</IonTitle>
                 </IonToolbar>
             </IonHeader>
@@ -75,7 +80,7 @@ export default function SignUpPage() {
                     </div>
                     <div className="ion-text-center">
                         <IonButton size="small" fill="clear" onClick={() => history.replace("/signin")}>
-                            Go back to sign in
+                            Already have an account?
                         </IonButton>
                     </div>
                 </form>

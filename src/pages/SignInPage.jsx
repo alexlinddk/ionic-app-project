@@ -7,11 +7,14 @@ import {
     IonItem,
     IonLabel,
     IonInput,
-    IonButton
+    IonButton,
+    IonButtons,
+    IonBackButton
 } from "@ionic/react";
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
+import { Toast } from "@capacitor/toast";
 
 export default function SignInPage() {
     const [mail, setMail] = useState("");
@@ -26,25 +29,32 @@ export default function SignInPage() {
             // Signed in
             const user = userCredential.user;
             console.log(user);
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    // User is signed in, see docs for a list of available properties
-                    // https://firebase.google.com/docs/reference/js/firebase.User
-                    // const uid = user.uid;
-                    history.replace(`restaurants`);
-                    console.log('Logged in');
-                } else {
-                    // User is signed out
-                    console.log('Logged out');
-                }
-            });
-        }).catch(error => { console.log(error) })
+        })
+            .catch(error => { console.log(error) })
     }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            // const uid = user.uid;
+            history.replace(`restaurants`);
+            console.log('Logged in!');
+            Toast.show({ text: "Signed in!" })
+        } else {
+            // User is signed out
+            console.log('Logged out!');
+            Toast.show({ text: "Signed out!" })
+        }
+    });
 
     return (
         <IonPage>
             <IonHeader>
                 <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonBackButton text="Back" defaultHref="/restaurants"></IonBackButton>
+                    </IonButtons>
                     <IonTitle>Sign In</IonTitle>
                 </IonToolbar>
             </IonHeader>
@@ -75,7 +85,7 @@ export default function SignInPage() {
                     </div>
                     <div className="ion-text-center">
                         <IonButton size="small" fill="clear" onClick={() => history.replace("/signup")}>
-                            Sign Up
+                            Don't have a account?
                         </IonButton>
                     </div>
                     <div className="ion-text-center">
