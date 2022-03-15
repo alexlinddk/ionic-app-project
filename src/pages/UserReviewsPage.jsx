@@ -15,17 +15,20 @@ import {
   IonTitle, 
   IonToolbar
 } from "@ionic/react";
+import { getAuth } from "firebase/auth";
 
 const UserReviewsPage = () => {
   const [user, setUser] = useState({});
   const [reviews, setReviews] = useState([]);
 
+  const auth = getAuth();
+  const currentUser = auth.currentUser;
   const params = useParams();
   const userId = params.id;
 
   useEffect(() => {
     async function getUserDataOnce() {
-      const snapshot = await get(getUserRef(userId));
+      const snapshot = await get(getUserRef(currentUser.uid));
       const userData = snapshot.val();
 
       setUser({
@@ -36,7 +39,7 @@ const UserReviewsPage = () => {
     }
 
     async function listenOnChange() {
-      const reviewsByUserId = query(reviewsRef, orderByChild("uid"), equalTo(userId));
+      const reviewsByUserId = query(reviewsRef, orderByChild("uid"), equalTo(currentUser.uid));
       const userData = await getUserDataOnce();
 
       onValue(reviewsByUserId, async snapshot => {
@@ -58,7 +61,7 @@ const UserReviewsPage = () => {
     }
 
     listenOnChange();
-  }, [userId]);
+  }, [currentUser.uid]);
 
   return (
     <IonPage>

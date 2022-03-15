@@ -15,11 +15,14 @@ import {
     IonButton,
     IonSlides,
     IonSlide,
-    IonText
+    IonText,
+    IonBackButton
 } from "@ionic/react";
 import { pin, call, mail, time, book, arrowForward, create } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
 import { useHistory, useParams } from "react-router";
+import { Browser } from '@capacitor/browser';
+import './RestaurantDetailView.css';
 
 const RestaurantDetailView = () => {
     const [restaurant, setRestaurant] = useState({});
@@ -44,14 +47,22 @@ const RestaurantDetailView = () => {
     };
 
     const goToReviews = () => {
-        history.replace(`/reviews/${restaurant.uid - 1}`);
+        history.push(`/restaurants/${restaurantId}/reviews`);
     };
+
+    const bookTable = () => {
+        Browser.open({ url: restaurant.bookUrl});
+    }
+
+    const openMenu = () => {
+        Browser.open({ url: restaurant.menuUrl});
+    }
     return (
         <IonPage>
             <IonHeader>
-                <IonToolbar>
+            <IonToolbar>
                     <IonButtons slot="start">
-                        <IonMenuButton menu="start" />
+                        <IonBackButton text="Back" defaultHref="/restaurants"></IonBackButton>
                     </IonButtons>
                     <IonTitle>{restaurant.name}</IonTitle>
                 </IonToolbar>
@@ -68,7 +79,7 @@ const RestaurantDetailView = () => {
                         })}
                     </IonSlides>}
                 <IonList>
-                    <IonButton style={{ margin: '20px auto', display: 'block', width: '50%' }} href={restaurant.bookUrl}>
+                    <IonButton style={{ margin: '20px auto', display: 'block', width: '50%' }} onClick={bookTable}>
                         Book Table
                     </IonButton>
                     <IonItem>
@@ -96,14 +107,14 @@ const RestaurantDetailView = () => {
                                 })}
                         </IonLabel>
                     </IonItem>
-                    <IonRouterLink href={restaurant.menuUrl}>
+                    <IonRouterLink id="goToReviews" onClick={openMenu} >
                         <IonItem>
                             <IonIcon slot="start" icon={book} />
                             <IonTitle>Menu</IonTitle>
                             <IonIcon slot="end" icon={arrowForward} />
                         </IonItem>
                     </IonRouterLink>
-                    <IonRouterLink onClick={goToReviews}>
+                    <IonRouterLink id="goToReviews" onClick={goToReviews}>
                         <IonItem>
                             <IonIcon slot="start" icon={create} />
                             <IonTitle>Reviews</IonTitle>

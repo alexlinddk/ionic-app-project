@@ -53,13 +53,13 @@ const App = () => (
           <Route path="/restaurants/:id" exact={true}>
             <RestaurantDetailView />
           </Route>
-          <Route path="/restaurants/reviews/:id" exact={true}>
+          <Route path="/restaurants/:id/reviews" exact={true}>
             <RestaurantReviewsPage />
           </Route>
-          <Route path="/profile/reviews/:id" exact={true}>
+          <Route path="/profile/reviews" exact={true}>
             <UserReviewsPage />
           </Route>
-          <Route path="/profile/editing/:id" exact={true}>
+          <Route path="/profile/editing" exact={true}>
             <EditProfilePage />
           </Route>
           <Route exact path="/signin">
