@@ -36,6 +36,10 @@ const ProfilePage = () => {
     history.replace('/profile/reviews/:id')
   }
 
+  function editProfile() {
+    history.replace('/profile/editing/:id')
+  }
+
   return (
     <IonPage>
       <MenuHeader title="Profile" />
@@ -70,7 +74,7 @@ const ProfilePage = () => {
                       <IonIcon icon={brushOutline} style={{fontSize: "20px"}} />
                     </IonCol>
                     <IonCol size="6" style={{ display: "flex", alignItems: "center"}}>
-                      <IonButton fill="clear" style={{ margin: "0 auto" }}>Edit Profile</IonButton>
+                      <IonButton fill="clear" style={{ margin: "0 auto" }} onClick={editProfile}>Edit Profile</IonButton>
                     </IonCol>
                     <IonCol />
                   </IonRow>
