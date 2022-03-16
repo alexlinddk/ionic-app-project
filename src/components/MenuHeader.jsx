@@ -5,7 +5,7 @@ const MenuHeader = ({ title }) => {
         <IonHeader>
             <IonToolbar>
                 <IonButtons slot="start">
-                    <IonMenuButton menu="start" />
+                    <IonMenuButton menu="start" style={{ "color": "var(--ion-color-primary)" }} />
                 </IonButtons>
                 <IonTitle>{title}</IonTitle>
             </IonToolbar>

@@ -59,8 +59,8 @@ export default function SignInPage() {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                <form onSubmit={handleSubmit}>
-                    <IonItem>
+                <form onSubmit={handleSubmit} style={{ padding: '20px' }}>
+                    <IonItem style={{margin: '10px 0px', borderRadius: '7px'}}>
                         <IonLabel position="stacked">Mail</IonLabel>
                         <IonInput
                             value={mail}
@@ -69,7 +69,7 @@ export default function SignInPage() {
                             onIonChange={e => setMail(e.target.value)}
                         />
                     </IonItem>
-                    <IonItem>
+                    <IonItem style={{margin: '10px 0px', borderRadius: '7px'}}>
                         <IonLabel position="stacked">Password</IonLabel>
                         <IonInput
                             value={password}

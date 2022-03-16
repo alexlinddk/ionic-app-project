@@ -18,7 +18,7 @@ import {
     IonText,
     IonBackButton
 } from "@ionic/react";
-import { pin, call, mail, time, book, arrowForward, create } from 'ionicons/icons';
+import { locate, call, mail, time, book, arrowForward, create } from 'ionicons/icons';
 import { useState, useEffect, } from "react";
 import { useHistory, useParams } from "react-router";
 import { Browser } from '@capacitor/browser';
@@ -73,33 +73,33 @@ const RestaurantDetailView = () => {
                         {restaurant.images.map((imageUrl, index) => {
                             return (
                                 <IonSlide key={index}>
-                                    <IonImg src={imageUrl} style={{ maxHeight: "250px" }} />
+                                    <IonImg src={imageUrl} style={{ maxHeight: "170px" }} />
                                 </IonSlide>
                             );
                         })}
                     </IonSlides>}
-                <IonList>
-                    <IonButton style={{ margin: '20px auto', display: 'block', width: '50%' }} onClick={bookTable}>
+                <IonList style={{paddingRight: '25px'}}>
+                    <IonButton style={{ margin: '20px auto', display: 'block', width: '50%', backgroundColor: 'var(--ion-color-primary)', borderRadius: '5px' }} onClick={bookTable}>
                         Book Table
                     </IonButton>
                     <IonItem>
-                        <IonIcon slot="start" icon={pin} />
+                        <IonIcon icon={locate} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                         <IonLabel>{restaurant.address}</IonLabel>
                     </IonItem>
                     <IonItem>
-                        <IonIcon slot="start" icon={call} />
+                        <IonIcon icon={call} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                         <IonLabel>
-                            <IonRouterLink>{restaurant.phone}</IonRouterLink>
+                            <IonRouterLink style={{ "color": "var(--ion-color-secondary)" }}>{restaurant.phone}</IonRouterLink>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
-                        <IonIcon slot="start" icon={mail} />
+                        <IonIcon icon={mail} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                         <IonLabel>
-                            <IonRouterLink>{restaurant.mail}</IonRouterLink>
+                            <IonRouterLink style={{ "color": "var(--ion-color-secondary)" }}>{restaurant.mail}</IonRouterLink>
                         </IonLabel>
                     </IonItem>
                     <IonItem>
-                        <IonIcon slot="start" icon={time} />
+                        <IonIcon icon={time} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                         <IonLabel>
                             {restaurant.openingHours &&
                                 restaurant.openingHours.map((item, index) => {
@@ -109,14 +109,14 @@ const RestaurantDetailView = () => {
                     </IonItem>
                     <IonRouterLink id="goToReviews" onClick={openMenu} >
                         <IonItem>
-                            <IonIcon slot="start" icon={book} />
+                            <IonIcon icon={book} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                             <IonTitle>Menu</IonTitle>
                             <IonIcon slot="end" icon={arrowForward} />
                         </IonItem>
                     </IonRouterLink>
                     <IonRouterLink id="goToReviews" onClick={goToReviews}>
                         <IonItem>
-                            <IonIcon slot="start" icon={create} />
+                            <IonIcon icon={create} style={{ "color": "var(--ion-color-primary)", marginRight: '10px' }} />
                             <IonTitle>Reviews</IonTitle>
                             <IonIcon slot="end" icon={arrowForward} />
                         </IonItem>

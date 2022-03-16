@@ -70,10 +70,10 @@ const ProfilePage = () => {
                 <IonGrid>
                   <IonRow style={{ padding: "10px 0px" }}>
                     <IonCol style={{ display: "flex", justifyContent: "flex-end" }}>
-                      <IonIcon icon={createOutline} style={{ fontSize: "20px" }} />
+                      <IonIcon icon={createOutline} style={{ fontSize: "20px",  color: 'var(--ion-color-primary)' }} />
                     </IonCol>
                     <IonCol size="6" style={{ display: "flex" }}>
-                      <IonButton fill="clear" style={{ margin: "0 auto" }} onClick={goToReviews}>Your reviews</IonButton>
+                      <IonButton fill="clear" style={{ margin: "0 auto", color: 'white' }} onClick={goToReviews}>Your reviews</IonButton>
                     </IonCol>
                     <IonCol />
                   </IonRow>
@@ -83,10 +83,10 @@ const ProfilePage = () => {
                 <IonGrid>
                   <IonRow style={{ padding: "10px 0px" }}>
                     <IonCol style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-                      <IonIcon icon={brushOutline} style={{ fontSize: "20px" }} />
+                      <IonIcon icon={brushOutline} style={{ fontSize: "20px", color: 'var(--ion-color-primary)' }} />
                     </IonCol>
                     <IonCol size="6" style={{ display: "flex", alignItems: "center" }}>
-                      <IonButton fill="clear" style={{ margin: "0 auto" }} onClick={editProfile}>Edit Profile</IonButton>
+                      <IonButton fill="clear" style={{ margin: "0 auto", color: 'white' }} onClick={editProfile}>Edit Profile</IonButton>
                     </IonCol>
                     <IonCol />
                   </IonRow>
@@ -96,7 +96,7 @@ const ProfilePage = () => {
                 <IonGrid>
                   <IonRow style={{ padding: "10px 0px" }}>
                     <IonCol style={{ display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-                      <IonIcon icon={logOutOutline} style={{ fontSize: "20px" }} />
+                      <IonIcon icon={logOutOutline} style={{ fontSize: "20px", color: 'var(--ion-color-primary)' }} />
                     </IonCol>
                     <IonCol size="6" style={{ display: "flex" }}>
                       <IonButton onClick={handleSignOut} fill="clear" color="danger" style={{ margin: "0 auto" }}>Sign out</IonButton>

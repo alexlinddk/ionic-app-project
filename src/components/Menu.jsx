@@ -75,7 +75,7 @@ const Menu = () => {
                                 return (
                                     <IonMenuToggle key={index} autoHide={false}>
                                         <IonItem className={location.pathname === page.url ? 'selected' : ''} routerLink={page.url} routerDirection="none" lines="none" detail={false}>
-                                            <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} />
+                                            <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} style={{ "color": "var(--ion-color-primary)" }}/>
                                             <IonLabel>{page.title}</IonLabel>
                                         </IonItem>
                                     </IonMenuToggle>
@@ -85,7 +85,7 @@ const Menu = () => {
                                 return (
                                     <IonMenuToggle key={index} autoHide={false}>
                                         <IonItem className={location.pathname === page.url ? 'selected' : ''} routerLink={page.url} routerDirection="none" lines="none" detail={false}>
-                                            <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} />
+                                            <IonIcon slot="start" ios={page.iosIcon} md={page.mdIcon} style={{ "color": "var(--ion-color-primary)" }}/>
                                             <IonLabel>{page.title}</IonLabel>
                                         </IonItem>
                                     </IonMenuToggle>
