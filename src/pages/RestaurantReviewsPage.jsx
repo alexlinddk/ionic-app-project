@@ -48,29 +48,8 @@ const RestaurantReviewsPage = () => {
         setRestaurant(restaurantData);
     }
 
-    async function handleSubmit(newReview) {
-        showLoader();
-        newReview.user = auth.currentUser.uid;
-        newReview.restaurant = restaurant;
-        const newReviewRef = push(reviewsRef);
-        const newReviewKey = newReviewRef.key;
-        set(newReviewRef, newReview)
-            .then(() => {
-                history.replace("/restaurants/reviews/:id");
-                Toast.show({
-                    text: "New review created!"
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            })
-            .finally(() => {
-                dismissLoader();
-            });
-    }
-
     function addReview() {
-        history.replace(`restaurants/reviews/add/${restaurantId}`);
+        history.push(`/restaurants/reviews/add/${restaurantId}`);
     }
 
     useIonViewWillEnter(() => {
