@@ -1,28 +1,34 @@
+import { Toast } from "@capacitor/toast";
 import {
+    IonBackButton,
     IonButton,
+    IonButtons,
     IonInput,
     IonItem,
     IonLabel,
     IonTextarea,
+    IonTitle,
+    IonToolbar,
     useIonLoading
 } from "@ionic/react"
 import { getAuth } from "firebase/auth";
+import { getDatabase, push, ref, set } from "firebase/database";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import { database } from '../firebaseConfig';
+import { useHistory, useParams } from "react-router";
+import { database, reviewsRef } from '../firebaseConfig';
 
 const AddReview = () => {
     const [restaurant, setRestaurant] = useState({});
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [date, setDate] = useState("");
+    const [user, setUser] = useState({});
     const [showLoader, dismissLoader] = useIonLoading();
 
     const auth = getAuth();
     const params = useParams();
     const restaurantId = params.id;
-    const currentDate = Date.now();
-    setDate(currentDate);
+    const history = useHistory();
 
     async function loadData() {
         //fetch restaurant data by restaurantId prop
@@ -32,52 +38,80 @@ const AddReview = () => {
     }
 
     function submitEvent(event) {
-        showLoader();
-        loadData()
         event.preventDefault();
-        database.ref("reviews").set({
-            user: auth.currentUser,
-            restaurant: restaurant,
-            title: title,
-            body: body,
-            date: date
-        }).catch(alert);
-        dismissLoader();
+        const newReview = { title: title, body: body, date: date, restaurant: restaurant, user: auth.currentUser };
+        writeReviewData(newReview);
+    }
+
+    function writeReviewData(newReview) {
+        showLoader();
+        const newReviewRef = push(reviewsRef);
+        set(newReviewRef, {
+            title: newReview.title,
+            body: newReview.body,
+            date: newReview.date,
+            restaurant: newReview.restaurant,
+
+        })
+            .then(() => {
+                history.replace(`/restaurant/reviews/${restaurantId}`);
+                Toast.show({
+                    text: "New review created!"
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            })
+            .finally(() => {
+                dismissLoader();
+            });
     }
 
     useEffect(() => {
-    }, [])
+        const currentDate = Date.now();
+        setDate(currentDate);
+        loadData();
+        const user = auth.currentUser;
+    }, [user])
     return (
-        <form onSubmit={() => submitEvent}>
-            <IonItem>
-                <IonLabel position="stacked">Title</IonLabel>
-                <IonInput
-                    value={title}
-                    placeholder="Type the title of your review"
-                    onIonChange={e => setTitle(e.target.value)}
-                    required
-                />
-            </IonItem>
-            <IonItem>
-                <IonLabel position="stacked">Description</IonLabel>
-                <IonTextarea
-                    value={body}
-                    placeholder="Tell us about your experience"
-                    onIonChange={e => setBody(e.target.value)}
-                    required
-                />
-            </IonItem>
+        <>
+            <IonToolbar>
+                <IonButtons slot="start">
+                    <IonBackButton text="Back" defaultHref={`/restaurants/reviews/${restaurantId}`}></IonBackButton>
+                </IonButtons>
+                <IonTitle>Reviews</IonTitle>
+            </IonToolbar>
+            <form onSubmit={submitEvent}>
+                <IonItem>
+                    <IonLabel position="stacked">Title</IonLabel>
+                    <IonInput
+                        value={title}
+                        placeholder="Type the title of your review"
+                        onIonChange={e => setTitle(e.target.value)}
+                        required
+                    />
+                </IonItem>
+                <IonItem>
+                    <IonLabel position="stacked">Description</IonLabel>
+                    <IonTextarea
+                        value={body}
+                        placeholder="Tell us about your experience"
+                        onIonChange={e => setBody(e.target.value)}
+                        required
+                    />
+                </IonItem>
 
-            <div className="ion-padding">
-                {title && body ? (
-                    <IonButton expand="block">Save</IonButton>
-                ) : (
-                    <IonButton type="submit" expand="block" disabled>
-                        Save
-                    </IonButton>
-                )}
-            </div>
-        </form>
+                <div className="ion-padding">
+                    {title && body ? (
+                        <IonButton expand="block">Save</IonButton>
+                    ) : (
+                        <IonButton type="submit" expand="block" disabled>
+                            Save
+                        </IonButton>
+                    )}
+                </div>
+            </form>
+        </>
     )
 }
 

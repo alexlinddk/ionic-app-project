@@ -31,12 +31,15 @@ export const reviewsRef = ref(database, "reviews");
 // Reference to users in Realtime DB
 export const usersRef = ref(database, "users");
 // Get reference to specific review using post id
-export function getPostRef(reviewId) {
+export function getReviewRef(reviewId) {
     return ref(database, "reviews/" + reviewId);
 }
 // Get reference to specific user using user id
 export function getUserRef(userId) {
     return ref(database, "users/" + userId);
+}
+export function getRestaurantRef(restaurantId) {
+  return ref(database, "restaurants/" + restaurantId);
 }
 
 // Reference to the storage service

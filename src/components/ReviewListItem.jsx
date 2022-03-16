@@ -24,10 +24,11 @@ const ReviewListitem = ({ user, review }) => {
                 </IonCol>
             </IonRow>
             <IonRow>
-                <IonText>{review.rating ? review.rating : '5'}</IonText>
                 <IonText>{review.date ? review.date : '01/01/2001'}</IonText>
             </IonRow>
-            <IonRow>{review.description ? review.description : 'Description'}</IonRow>
+            <IonRow>
+                <IonText>{review.body ? review.body : 'Description'}</IonText>
+            </IonRow>
         </IonCard>
     );
 }
