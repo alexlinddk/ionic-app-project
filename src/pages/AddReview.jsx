@@ -22,7 +22,6 @@ const AddReview = () => {
     const [title, setTitle] = useState("");
     const [body, setBody] = useState("");
     const [date, setDate] = useState("");
-    const [user, setUser] = useState({});
     const [showLoader, dismissLoader] = useIonLoading();
 
     const auth = getAuth();
@@ -39,7 +38,7 @@ const AddReview = () => {
 
     function submitEvent(event) {
         event.preventDefault();
-        const newReview = { title: title, body: body, date: date, restaurant: restaurant, user: user };
+        const newReview = { title: title, body: body, date: date, restaurantId: restaurantId, userId: auth.currentUser.uid };
         writeReviewData(newReview);
     }
 
@@ -50,8 +49,8 @@ const AddReview = () => {
             title: newReview.title,
             body: newReview.body,
             date: newReview.date,
-            restaurant: newReview.restaurant,
-            user: user
+            restaurantId: newReview.restaurantId,
+            user: auth.currentUser.uid
         })
             .then(() => {
                 history.replace(`/restaurants/reviews/${restaurantId}`);
@@ -71,9 +70,7 @@ const AddReview = () => {
         const currentDate = Date.now();
         setDate(currentDate);
         loadData();
-        setUser(auth.currentUser);
-
-    }, [user])
+    }, [])
     return (
         <>
             <IonToolbar>

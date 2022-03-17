@@ -22,13 +22,12 @@ const UserReviewsPage = () => {
   const [reviews, setReviews] = useState([]);
 
   const auth = getAuth();
-  const currentUser = auth.currentUser;
   const params = useParams();
   const userId = params.id;
 
   useEffect(() => {
     async function getUserDataOnce() {
-      const snapshot = await get(getUserRef(currentUser.uid));
+      const snapshot = await get(getUserRef(auth.currentUser.uid));
       const userData = snapshot.val();
 
       setUser({
@@ -39,7 +38,7 @@ const UserReviewsPage = () => {
     }
 
     async function listenOnChange() {
-      const reviewsByUserId = query(reviewsRef, orderByChild("user/email"), equalTo(currentUser.email));
+      const reviewsByUserId = query(reviewsRef, orderByChild("userId"), equalTo(userId));
       const userData = await getUserDataOnce();
 
       onValue(reviewsByUserId, async snapshot => {
@@ -51,7 +50,7 @@ const UserReviewsPage = () => {
           const review = {
             uid,
             ...data,
-            user: userData
+            user: userId
           };
           reviewsArray.push(review);
         });
@@ -61,7 +60,7 @@ const UserReviewsPage = () => {
     }
 
     listenOnChange();
-  }, [currentUser.uid]);
+  }, []);
 
   return (
     <IonPage>

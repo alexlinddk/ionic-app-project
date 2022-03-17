@@ -49,7 +49,9 @@ const RestaurantReviewsPage = () => {
         }
 
         async function listenOnChange() {
-            const reviewsByRestaurantId = query(reviewsRef, orderByChild("restaurant/uid"), equalTo(restaurantId));
+            showLoader();
+
+            const reviewsByRestaurantId = query(reviewsRef, orderByChild("restaurantId"), equalTo(restaurantId));
             const restaurantData = await getRestaurantDataOnce();
             console.log(restaurantData);
 
@@ -61,18 +63,22 @@ const RestaurantReviewsPage = () => {
                     const review = {
                         uid,
                         ...data,
-                        restaurant: restaurantData
+                        restaurantId: restaurantId
                     };
                     reviewsArray.push(review);
                     console.log(review);
+
                     console.log(reviewSnapshot);
                 });
+                console.log(reviewsArray);
                 setReviews(reviewsArray.reverse());
                 console.log(reviewsArray);
             });
+            dismissLoader();
         }
 
         listenOnChange();
+
     }, [restaurantId]);
 
     return (
@@ -89,12 +95,10 @@ const RestaurantReviewsPage = () => {
                 </IonToolbar>
             </IonHeader>
             <IonContent fullscreen>
-                <IonList>
-                    <IonListHeader>
-                        <IonLabel>{reviews.length ? "Restaurant Reviews" : "No reviews yet"}</IonLabel>
-                    </IonListHeader>
-                    <ReviewList reviews={reviews} />
-                </IonList>
+                <IonListHeader>
+                    <IonLabel>{reviews.length ? "Restaurant Reviews" : "No reviews yet"}</IonLabel>
+                </IonListHeader>
+                <ReviewList reviews={reviews} />
             </IonContent>
         </IonPage>
     );
