@@ -14,14 +14,17 @@ const ReviewListitem = ({ user, review }) => {
     return (
         <IonCard>
             <IonRow>
-                <IonCol>
+                {/* <IonCol>
                     <IonAvatar>
                         <IonImg src={user ? review.user.image : defaultPic} />
                     </IonAvatar>
-                </IonCol>
+                </IonCol> */}
                 <IonCol>
-                    <IonText>{review.user.name ? review.user.name : 'Anonymous'}</IonText>
+                    <IonText>{review.user.email ? review.user.email : 'Anonymous'}</IonText>
                 </IonCol>
+            </IonRow>
+            <IonRow>
+                <IonText>{review.title ? review.title : 'Title'}</IonText>
             </IonRow>
             <IonRow>
                 <IonText>{review.date ? review.date : '01/01/2001'}</IonText>

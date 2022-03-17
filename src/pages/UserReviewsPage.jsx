@@ -39,17 +39,17 @@ const UserReviewsPage = () => {
     }
 
     async function listenOnChange() {
-      const reviewsByUserId = query(reviewsRef, orderByChild("uid"), equalTo(currentUser.uid));
+      const reviewsByUserId = query(reviewsRef, orderByChild("user/email"), equalTo(currentUser.email));
       const userData = await getUserDataOnce();
 
       onValue(reviewsByUserId, async snapshot => {
         const reviewsArray = [];
 
         snapshot.forEach(reviewSnapshot => {
-          const id = reviewSnapshot.key;
+          const uid = reviewSnapshot.key;
           const data = reviewSnapshot.val();
           const review = {
-            id,
+            uid,
             ...data,
             user: userData
           };

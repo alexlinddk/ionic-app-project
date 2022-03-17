@@ -28,21 +28,21 @@ export default function SignUpPage() {
                 // Signed in
                 const user = userCredential.user;
                 console.log(user);
-
-                onAuthStateChanged(auth, (user) => {
-                    if (user) {
-                        // User is signed in, see docs for a list of available properties
-                        // https://firebase.google.com/docs/reference/js/firebase.User
-                        const uid = user.uid;
-                        history.push(`restaurants`);
-                        console.log('Logged in');
-                    } else {
-                        // User is signed out
-                        console.log('Logged out');
-                    }
-                });
             }).catch(error => { console.log(error) })
     }
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid;
+            history.push(`restaurants`);
+            console.log('Logged in');
+        } else {
+            // User is signed out
+            console.log('Logged out');
+        }
+    });
+    
     return (
         <IonPage className="posts-page">
             <IonHeader>

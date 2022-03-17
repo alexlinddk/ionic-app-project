@@ -39,7 +39,7 @@ const AddReview = () => {
 
     function submitEvent(event) {
         event.preventDefault();
-        const newReview = { title: title, body: body, date: date, restaurant: restaurant, user: auth.currentUser };
+        const newReview = { title: title, body: body, date: date, restaurant: restaurant, user: user };
         writeReviewData(newReview);
     }
 
@@ -51,10 +51,10 @@ const AddReview = () => {
             body: newReview.body,
             date: newReview.date,
             restaurant: newReview.restaurant,
-
+            user: user
         })
             .then(() => {
-                history.replace(`/restaurant/reviews/${restaurantId}`);
+                history.replace(`/restaurants/reviews/${restaurantId}`);
                 Toast.show({
                     text: "New review created!"
                 });
@@ -71,7 +71,8 @@ const AddReview = () => {
         const currentDate = Date.now();
         setDate(currentDate);
         loadData();
-        const user = auth.currentUser;
+        setUser(auth.currentUser);
+
     }, [user])
     return (
         <>
