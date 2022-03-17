@@ -44,4 +44,5 @@ const RestaurantsPage = () => {
   );
 };
 
+
 export default RestaurantsPage;
