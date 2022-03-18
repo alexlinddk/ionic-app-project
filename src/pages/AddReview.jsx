@@ -67,8 +67,8 @@ const AddReview = () => {
     }
 
     useEffect(() => {
-        const currentDate = Date.now();
-        setDate(currentDate);
+        const currentDate = new Date();
+        setDate(currentDate.toDateString());
         loadData();
     }, [])
     return (

@@ -1,89 +1,98 @@
+import { useHistory, useParams } from "react-router";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
-import ReviewListItem from "../components/ReviewListItem";
-import { getUserRef, reviewsRef } from "../firebaseConfig";
-import { onValue, query, orderByChild, equalTo, get } from "firebase/database";
 import {
-  IonBackButton, 
-  IonButtons, 
-  IonContent, 
-  IonHeader, 
-  IonLabel, 
-  IonList, 
-  IonListHeader, 
-  IonPage, 
-  IonTitle, 
-  IonToolbar
+    IonBackButton,
+    IonButton,
+    IonButtons,
+    IonContent,
+    IonHeader,
+    IonLabel,
+    IonList,
+    IonListHeader,
+    IonPage,
+    IonTitle,
+    IonToolbar,
+    useIonViewWillEnter,
+    IonIcon,
+    useIonLoading
 } from "@ionic/react";
+import ReviewList from "../components/ReviewList";
+import { Toast } from "@capacitor/toast";
+import { getUserRef, reviewsRef } from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
+import { equalTo, onValue, orderByChild, push, query, set, get } from "firebase/database";
+import { add } from "ionicons/icons";
 
 const UserReviewsPage = () => {
-  const [user, setUser] = useState({});
-  const [reviews, setReviews] = useState([]);
+    const [reviews, setReviews] = useState([]);
+    const [user, setUser] = useState([]);
+    const [showLoader, dismissLoader] = useIonLoading();
 
-  const auth = getAuth();
-  const params = useParams();
-  const userId = params.id;
+    // const history = useHistory();
+    // const params = useParams();
+    const auth = getAuth();
+    const userId = auth.currentUser.uid;
 
-  useEffect(() => {
-    async function getUserDataOnce() {
-      const snapshot = await get(getUserRef(auth.currentUser.uid));
-      const userData = snapshot.val();
+    useEffect(() => {
+        async function getUserDataOnce() {
+            const snapshot = await get(getUserRef(userId));
+            console.log(userId);
+            const userData = snapshot.val();
+            console.log(userData);
+            setUser({
+                uid: userId,
+                ...userData
+            });
+            return userData;
+        }
 
-      setUser({
-        id: userId,
-        ...userData
-      });
-      return userData;
-    }
+        async function listenOnChange() {
+            showLoader();
 
-    async function listenOnChange() {
-      const reviewsByUserId = query(reviewsRef, orderByChild("userId"), equalTo(userId));
-      const userData = await getUserDataOnce();
+            const reviewsByUserId = query(reviewsRef, orderByChild("userId"), equalTo(userId));
+            const userData = await getUserDataOnce();
+            console.log(userData);
+            console.log(userId);
 
-      onValue(reviewsByUserId, async snapshot => {
-        const reviewsArray = [];
+            onValue(reviewsByUserId, async snapshot => {
+                const reviewsArray = [];
+                snapshot.forEach(reviewSnapshot => {
+                    const uid = reviewSnapshot.key;
+                    const data = reviewSnapshot.val();
+                    const review = {
+                        uid,
+                        ...data,
+                        userId: userId
+                    };
+                    reviewsArray.push(review);
+                    console.log(reviewsArray);
+                });
+                setReviews(reviewsArray.reverse());
+            });
+            dismissLoader();
+        }
+        listenOnChange();
 
-        snapshot.forEach(reviewSnapshot => {
-          const uid = reviewSnapshot.key;
-          const data = reviewSnapshot.val();
-          const review = {
-            uid,
-            ...data,
-            user: userId
-          };
-          reviewsArray.push(review);
-        });
+    }, [userId]);
 
-        setReviews(reviewsArray.reverse());
-      });
-    }
-
-    listenOnChange();
-  }, []);
-
-  return (
-    <IonPage>
-      <IonHeader translucent>
-        <IonToolbar>
-          <IonButtons slot="start">
-            <IonBackButton text="Back" defaultHref="/profile"></IonBackButton>
-          </IonButtons>
-          <IonTitle>{user?.name ? user.name : "Unknown User Name"}</IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen>
-        <IonList>
-          <IonListHeader>
-            <IonLabel>{reviews.length ? "Users Reviews" : "No reviews yet"}</IonLabel>
-          </IonListHeader>
-          {reviews.map(review => (
-            <ReviewListItem review={review} key={review.id} />
-          ))}
-        </IonList>
-      </IonContent>
-    </IonPage>
-  )
+    return (
+        <IonPage>
+            <IonHeader translucent>
+                <IonToolbar>
+                    <IonButtons slot="start">
+                        <IonBackButton text="Back" defaultHref="/profile"></IonBackButton>
+                    </IonButtons>
+                    <IonTitle>Reviews</IonTitle>
+                </IonToolbar>
+            </IonHeader>
+            <IonContent fullscreen>
+                <IonListHeader>
+                    <IonLabel>{reviews.length ? "User Reviews" : "No reviews yet"}</IonLabel>
+                </IonListHeader>
+                <ReviewList reviews={reviews} />
+            </IonContent>
+        </IonPage>
+    );
 }
 
-export default UserReviewsPage
+export default UserReviewsPage;

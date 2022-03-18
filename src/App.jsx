@@ -36,6 +36,7 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 import EditProfilePage from './pages/EditProfilePage';
 import AddReview from './pages/AddReview';
+import EditReviewPage from './pages/EditReviewPage';
 
 setupIonicReact();
 
@@ -62,6 +63,9 @@ const App = () => (
           </Route>
           <Route path="/profile/reviews" exact={true}>
             <UserReviewsPage />
+          </Route>
+          <Route path="/profile/reviews/:id" exact={true}>
+            <EditReviewPage />
           </Route>
           <Route path="/profile/editing" exact={true}>
             <EditProfilePage />
