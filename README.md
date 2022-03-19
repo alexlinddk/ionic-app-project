@@ -1,4 +1,5 @@
 # ionic-app-project
+
 Indledning:
 I vores projekt, har vi i forløbet kreeret en Mobile Web App, ved hjælp af ionic react løsningen. Vi har udarbejdet en Restaurant app, hvor du kan login med egen bruger ved hjælp af firebase, hvor de bruger som logger ind, bliver lagret i firebase’s database. Ideen med hele app’en er at du som bruger kan, se hvilke restauranter der er nær dig. Man kan udforske de lokale restauranter i Århus, som der er blevet tilkoblet ens lokation. Man se restauranternes menuer og anmeldelser og ens egen reviews. For at vi kan få det her til at ske, gør vi også brug af CRUD, hvor du som bruger, kan Oprette, Slette, Hente og Opdatere Reviews. Enhver bruger kan ændre, i sin profil med billede, navn, mail og kode, så kontoen bliver mere personligt anlagt.
 
