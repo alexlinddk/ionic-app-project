@@ -1,6 +1,7 @@
 import {
     IonContent,
     IonIcon,
+    IonImg,
     IonItem,
     IonLabel,
     IonList,
@@ -68,7 +69,7 @@ const Menu = () => {
         <IonMenu contentId="main" type="overlay">
             <IonContent>
                 <IonList id="inbox-list">
-                    <IonListHeader>Menu</IonListHeader>
+                    <IonListHeader><IonImg src="/assets/logo.png" style={{margin: '8px 0 4px 0', height: '34px'}} height="40" alt="logo"></IonImg></IonListHeader>
                     {
                         !user ?
                             loggedOut.map((page, index) => {
