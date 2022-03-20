@@ -12,9 +12,9 @@ import {
     IonTitle,
     IonToolbar
 } from "@ionic/react"
-import { remove, set } from "firebase/database";
+import { remove, set, update } from "firebase/database";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { getReviewRef } from "../firebaseConfig";
 
 const EditReviewPage = () => {
@@ -24,22 +24,25 @@ const EditReviewPage = () => {
 
     const params = useParams()
     const reviewId = params.id;
+    const history = useHistory();
 
     function submitEvent(reviewId, title, body) {
-        set(getReviewRef(reviewId), {
+        update(getReviewRef(reviewId), {
             title: title,
             body: body,
             date: new Date()
-          });
-        
+        });
+        history.replace('/profile/reviews')
     };
 
     function deleteReview() {
         remove(getReviewRef(reviewId));
+        history.replace('/profile/reviews')
     }
 
     useEffect(() => {
-        setDate(Date.now("HH:ii:ss"));
+        const currentDate = new Date();
+        setDate(currentDate.toDateString());
     }, [])
 
     return (
@@ -52,37 +55,35 @@ const EditReviewPage = () => {
             </IonToolbar>
 
             <IonContent fullscreen style={{ display: 'flex' }}>
-                <form onSubmit={submitEvent}>
-                    <IonList>
-                        <IonItem>
-                            <IonLabel position="stacked">Title</IonLabel>
-                            <IonInput
-                                value={title}
-                                placeholder="Change title"
-                                onIonChange={e => setTitle(e.target.value)}
-                            />
-                        </IonItem>
-                        <IonItem>
-                            <IonLabel position="stacked">Description</IonLabel>
-                            <IonInput
-                                value={body}
-                                placeholder="Change description"
-                                onIonChange={e => setBody(e.target.value)}
-                                required
-                            />
-                        </IonItem>
-                        <div className="ion-padding">
-                            {title && body ? (
-                                <IonButton expand="block">Save</IonButton>
-                            ) : (
-                                <IonButton type="submit" expand="block" disabled>
-                                    Save
-                                </IonButton>
-                            )}
-                        </div>
-                    </IonList>
+                <form onSubmit={submitEvent} style={{ padding: '20px' }}>
+                    <IonItem style={{ margin: '10px 0px', borderRadius: '7px' }}>
+                        <IonLabel position="stacked">Title</IonLabel>
+                        <IonInput
+                            value={title}
+                            placeholder="Change title"
+                            onIonChange={e => setTitle(e.target.value)}
+                        />
+                    </IonItem>
+                    <IonItem style={{ margin: '10px 0px', borderRadius: '7px' }}>
+                        <IonLabel position="stacked">Description</IonLabel>
+                        <IonInput
+                            value={body}
+                            placeholder="Change description"
+                            onIonChange={e => setBody(e.target.value)}
+                            required
+                        />
+                    </IonItem>
+                    <div className="ion-padding">
+                        {title && body ? (
+                            <IonButton expand="block">Save</IonButton>
+                        ) : (
+                            <IonButton type="submit" expand="block" disabled>
+                                Save
+                            </IonButton>
+                        )}
+                    </div>
                 </form>
-                <IonButton color="danger" onClick={deleteReview}>Delete</IonButton>
+                <IonButton color="danger" onClick={deleteReview} style={{ display: 'block', width: '50%', margin: '0 auto' }}>Delete</IonButton>
             </IonContent>
         </IonPage>
     )

@@ -14,24 +14,31 @@ import {
     IonToolbar,
     useIonViewWillEnter,
     IonIcon,
-    useIonLoading
+    useIonLoading,
+    IonRouterLink,
+    IonCard
 } from "@ionic/react";
 import ReviewList from "../components/ReviewList";
 import { Toast } from "@capacitor/toast";
-import { getUserRef, reviewsRef } from "../firebaseConfig";
+import { getReviewRef, getUserRef, reviewsRef } from "../firebaseConfig";
 import { getAuth } from "firebase/auth";
-import { equalTo, onValue, orderByChild, push, query, set, get } from "firebase/database";
-import { add } from "ionicons/icons";
+import { equalTo, onValue, orderByChild, push, query, set, get, deleteDoc, doc, data, remove } from "firebase/database";
+import { add, closeOutline, createOutline } from "ionicons/icons";
+import ReviewListitem from "../components/ReviewListItem";
 
 const UserReviewsPage = () => {
     const [reviews, setReviews] = useState([]);
     const [user, setUser] = useState([]);
     const [showLoader, dismissLoader] = useIonLoading();
 
-    // const history = useHistory();
+    const history = useHistory();
     // const params = useParams();
     const auth = getAuth();
     const userId = auth.currentUser.uid;
+
+    async function removeReview(id) {
+        await remove(getReviewRef(id));
+    }
 
     useEffect(() => {
         async function getUserDataOnce() {
@@ -49,7 +56,7 @@ const UserReviewsPage = () => {
         async function listenOnChange() {
             showLoader();
 
-            const reviewsByUserId = query(reviewsRef, orderByChild("userId"), equalTo(userId));
+            const reviewsByUserId = query(reviewsRef, orderByChild("user"), equalTo(userId));
             const userData = await getUserDataOnce();
             console.log(userData);
             console.log(userId);
@@ -89,7 +96,20 @@ const UserReviewsPage = () => {
                 <IonListHeader>
                     <IonLabel>{reviews.length ? "User Reviews" : "No reviews yet"}</IonLabel>
                 </IonListHeader>
-                <ReviewList reviews={reviews} />
+                <IonList>
+                    {reviews.map(review => {
+                        return (
+                            <IonCard key={review.uid}>
+                                <ReviewListitem key={review.uid} review={review} />
+                                <IonButtons style={{ display: 'flex', justifyContent: 'right' }}>
+                                    <IonButton color="warning" onClick={() => history.replace(`/profile/reviews/${review.uid}`)}>
+                                        <p style={{ marginRight: '10px' }}>Edit</p><IonIcon icon={createOutline} />
+                                    </IonButton>
+                                </IonButtons>
+                            </IonCard>
+                        );
+                    })}
+                </IonList>
             </IonContent>
         </IonPage>
     );

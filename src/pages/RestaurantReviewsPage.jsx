@@ -33,9 +33,9 @@ const RestaurantReviewsPage = () => {
     const restaurantId = params.id;
     const auth = getAuth();
 
-    function addReview() {
-        history.push(`/restaurants/reviews/add/${restaurantId}`);
-    }
+    // function addReview() {
+    //     history.push(`/restaurants/reviews/add/${restaurantId}`);
+    // }
 
     useEffect(() => {
         async function getRestaurantDataOnce() {
@@ -90,7 +90,7 @@ const RestaurantReviewsPage = () => {
                     </IonButtons>
                     <IonTitle>Reviews</IonTitle>
                     <IonButtons slot="end">
-                        <IonButton text="Add" onClick={addReview}>New<IonIcon icon={add} /></IonButton>
+                        <IonButton text="Add" onClick={() => history.replace(`/restaurants/reviews/add/${restaurantId}`)}>New<IonIcon icon={add} /></IonButton>
                     </IonButtons>
                 </IonToolbar>
             </IonHeader>

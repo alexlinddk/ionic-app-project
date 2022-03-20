@@ -79,8 +79,8 @@ const AddReview = () => {
                 </IonButtons>
                 <IonTitle>Reviews</IonTitle>
             </IonToolbar>
-            <form onSubmit={submitEvent}>
-                <IonItem>
+            <form onSubmit={submitEvent} style={{ padding: '20px' }}>
+                <IonItem style={{margin: '10px 0px', borderRadius: '7px'}}>
                     <IonLabel position="stacked">Title</IonLabel>
                     <IonInput
                         value={title}
@@ -89,7 +89,7 @@ const AddReview = () => {
                         required
                     />
                 </IonItem>
-                <IonItem>
+                <IonItem style={{margin: '10px 0px', borderRadius: '7px'}}>
                     <IonLabel position="stacked">Description</IonLabel>
                     <IonTextarea
                         value={body}
